@@ -1,0 +1,40 @@
+[
+  {
+    "profile_id": "freemium_profile",
+    "first_name": "Otto",
+    "last_name": "Nova",
+    "gender": "male",
+    "display_name": "Otto Nova",
+    "is_primary_profile": true,
+    "policy_number": "000000001",
+    "tariff_id": "chi-first",
+    "tariff_label": "Freemium",
+    "tariff": {
+      "id": "chi-first",
+      "label": "Freemium",
+      "icon": {
+        "url": "https://freemium.ottonova.de/api/images/tariffs/tariff_freemium_first_class.png",
+        "primary_color": "#667093",
+        "secondary_color": "#999FB7"
+      },
+      "excess_rate": 10
+    },
+    "date_of_birth": "1989-01-01",
+    "address": {
+      "street": "Ottostr.",
+      "street_number": "4",
+      "zip": "80333",
+      "city": "München"
+    },
+    "contact": {
+      "email": "feedback@ottonova.app",
+      "phone": "089 12 14 07 12"
+    },
+    "profile_attributes": [
+      "freemium",
+      "signup_complete",
+      "appointment_booking_available",
+      "health_x_complete"
+    ]
+  }
+]
