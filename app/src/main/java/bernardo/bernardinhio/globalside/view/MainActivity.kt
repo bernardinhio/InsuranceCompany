@@ -2,10 +2,9 @@ package bernardo.bernardinhio.globalside.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import bernardo.bernardinhio.globalside.R
 import bernardo.bernardinhio.globalside.dataprovider.GlobalSideDataProvider
-import bernardo.bernardinhio.globalside.dataprovider.LOG_TAG
 import bernardo.bernardinhio.globalside.retrofit.model.ProfileDataModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,24 +14,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bindDataFromCoroutines()
+        bindToDataProviderListOfProfiles()
 
         GlobalSideDataProvider.getProfiles()
     }
 
-    private fun bindDataFromCoroutines(){
+    private fun bindToDataProviderListOfProfiles(){
+
         GlobalScope.launch {
 
-            val listProfilesData: List<ProfileDataModel>? = GlobalSideDataProvider.channelListProfilesData.receive()
+            val responseListProfilesData: Pair<String, List<ProfileDataModel>?> = GlobalSideDataProvider.channelListProfiles.receive()
 
-            listProfilesData?.forEach { profile ->
-                Log.d(LOG_TAG, profile.toString())
+            runOnUiThread{
 
-                runOnUiThread{
+                Toast.makeText(this@MainActivity, responseListProfilesData.first, Toast.LENGTH_LONG).show()
+
+                responseListProfilesData.second?.forEach { profile ->
+
+                    profile.profile_id?.let {
+                        Toast.makeText(this@MainActivity, it, Toast.LENGTH_LONG).show()
+
+                        GlobalSideDataProvider.getProfileHealthPrompts(profile.profile_id!!)
+                    }
 
                 }
-
             }
+
         }
 
     }
