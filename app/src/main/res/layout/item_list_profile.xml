@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="10dp"
+    android:background="#FFFFFF"
+    android:layout_marginTop="5dp">
+
+    <TextView
+        android:id="@+id/tvDisplayedName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Henry Buschmann"/>
+
+    <TextView
+        android:id="@+id/tvIsPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#027AD9"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDisplayedName"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Primary"/>
+
+    <TextView
+        android:id="@+id/tvDateOfBirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDisplayedName"
+        app:layout_constraintEnd_toStartOf="@id/tvGender"
+        tools:text="08.02.1954"/>
+
+    <TextView
+        android:id="@+id/tvGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDisplayedName"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="M"/>
+
+    <TextView
+        android:id="@+id/tvTarrifLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvIsPrimary"
+        tools:text="Freemium"/>
+
+    <ImageView
+        android:id="@+id/ivTariffIcon"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTarrifLabel"
+        tools:background="#B1B2B3"/>
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/ivTariffIcon"
+        tools:text="munchen strass 65"/>
+
+    <TextView
+        android:id="@+id/tvContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="email@email.com  0123 456 78 90"/>
+
+    <Button
+        android:id="@+id/btnTimelineEvents"
+        android:text="Timeline Events"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="24dp"
+        android:background="#95CFC9"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvContact"/>
+
+    <Button
+        android:id="@+id/btnHealthPrompt"
+        android:text="Health Prompts"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="24dp"
+        android:background="#BCA3D0"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btnTimelineEvents"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

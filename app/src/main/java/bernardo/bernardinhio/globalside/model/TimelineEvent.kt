@@ -1,4 +1,4 @@
-package bernardo.bernardinhio.globalside.mdeol
+package bernardo.bernardinhio.globalside.model
 
 class TimelineEvent(
     var time: String = "",

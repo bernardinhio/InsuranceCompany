@@ -9,7 +9,7 @@ class ProfileDataModel {
     var last_name: String? = null
     var profile_attributes: Array<String>? = null
     var display_name: String? = null
-    var is_primary_profile: String? = null
+    var is_primary_profile: Boolean? = null
     var policy_number: String? = null
     var profile_id: String? = null
     var contact: Contact? = null
