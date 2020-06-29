@@ -27,8 +27,10 @@ object GlobalSideDataProvider {
     const val ENDPOINT_LIST_PROFILES = "user/customer/profiles"
 
     val channelListProfiles: Channel<Pair<String, List<ProfileDataModel>?>> = Channel<Pair<String, List<ProfileDataModel>?>>()
+    var listProfiles: Pair<String, List<ProfileDataModel>?> = Pair(BackendStatus.REQUEST_NOT_MADE_YET.message, listOf())
+
     val channelListProfileTimelineEvents: Channel<Pair<String, List<ProfileTimelineEventDataModel>?>> = Channel<Pair<String, List<ProfileTimelineEventDataModel>?>>()
-    val channelListProfileHealthPrompt: Channel<Pair<String, List<ProfileHealthPromptDataModel>?>> = Channel<Pair<String, List<ProfileHealthPromptDataModel>?>>()
+    val channelListProfileHealthPrompts: Channel<Pair<String, List<ProfileHealthPromptDataModel>?>> = Channel<Pair<String, List<ProfileHealthPromptDataModel>?>>()
 
     fun getProfiles(){
 
@@ -82,10 +84,9 @@ object GlobalSideDataProvider {
         Log.d(LOG_TAG, message)
         GlobalScope.launch {
             channelListProfiles.send(Pair(message, body))
+            listProfiles = Pair(message, body)
         }
     }
-
-
 
     fun getProfileTimelineEvents(profileId : String) {
 
@@ -192,7 +193,7 @@ object GlobalSideDataProvider {
     private fun initializeListOfProfileHealthPrompts(message: String, body: List<ProfileHealthPromptDataModel>?) {
         Log.d(LOG_TAG, message)
         GlobalScope.launch {
-            channelListProfileHealthPrompt.send(Pair(message, body))
+            channelListProfileHealthPrompts.send(Pair(message, body))
         }
     }
 

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bernardo.bernardinhio.globalside.R
 import bernardo.bernardinhio.globalside.model.Profile
 import bernardo.bernardinhio.globalside.view.HealthPromptsActivity
-import bernardo.bernardinhio.globalside.view.TimeLineEventsActivity
+import bernardo.bernardinhio.globalside.view.TimelineEventsActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_list_profile.view.*
 
@@ -36,15 +36,19 @@ class ProfilesAdapter(
             textViewGender.text = itemData.gender
             textViewTarrifLabel.text = itemData.tariffLabel
             textViewTarrifLabel.setBackgroundColor(if(itemData.isPrimary) Color.parseColor(itemData.tariffIconPrimaryColor) else Color.parseColor(itemData.tariffIconSecondaryColor))
-            imageViewTariffIcon.setBackgroundColor(if(itemData.isPrimary) Color.parseColor(itemData.tariffIconPrimaryColor) else Color.parseColor(itemData.tariffIconSecondaryColor))
-            Glide.with(context)
-                .load(itemData.tariffIconUrl)
-                .fitCenter()
-                .into(holder.imageViewTariffIcon)
+            if (itemData.tariffIconUrl.isNotEmpty()){
+                imageViewTariffIcon.setBackgroundColor(if(itemData.isPrimary) Color.parseColor(itemData.tariffIconPrimaryColor) else Color.parseColor(itemData.tariffIconSecondaryColor))
+                Glide.with(context)
+                    .load(itemData.tariffIconUrl)
+                    .fitCenter()
+                    .into(holder.imageViewTariffIcon)
+            } else {
+                imageViewTariffIcon.visibility = View.GONE
+            }
             textViewAddress.text = itemData.address
             textViewContact.text = itemData.contact
-            buttonTimelineEvents.setOnClickListener{ context.startActivity(Intent(context, TimeLineEventsActivity::class.java)) }
-            buttonHealthPrompt.setOnClickListener{ context.startActivity(Intent(context, HealthPromptsActivity::class.java)) }
+            buttonTimelineEvents.setOnClickListener{ context.startActivity(Intent(context, TimelineEventsActivity::class.java).apply { putExtra("profileId", itemData.profileId) }) }
+            buttonHealthPrompt.setOnClickListener{ context.startActivity(Intent(context, HealthPromptsActivity::class.java).apply { putExtra("profileId", itemData.profileId) }) }
         }
     }
 

@@ -23,20 +23,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         title = "Profiles - Global Side"
 
-        bindToDataProviderListOfProfiles()
-        GlobalSideDataProvider.getProfiles()
+        // call backend for profiles list only once
+        if (GlobalSideDataProvider.listProfiles.first.equals(GlobalSideDataProvider.BackendStatus.REQUEST_NOT_MADE_YET.message)){
+            bindToListOfProfilesChannel()
+            GlobalSideDataProvider.getProfiles()
+        } else {
+            populateRecyclerView(GlobalSideDataProvider.listProfiles)
+        }
 
         setupRecyclerView()
         setupRecyclerViewAdapter()
     }
 
-    private fun bindToDataProviderListOfProfiles(){
+    private fun bindToListOfProfilesChannel(){
+        // for the first call implement reactive
         GlobalScope.launch {
             val backendData: Pair<String, List<ProfileDataModel>?> = GlobalSideDataProvider.channelListProfiles.receive()
             populateRecyclerView(backendData)
 
             runOnUiThread{
-                Toast.makeText(this@MainActivity, backendData.first, Toast.LENGTH_LONG).show()
+                if (!backendData.first.equals(GlobalSideDataProvider.BackendStatus.SUCCESS.message)){
+                    Toast.makeText(this@MainActivity, backendData.first, Toast.LENGTH_LONG).show()
+                }
                 adapterRecyclerView.notifyDataSetChanged()
             }
         }
